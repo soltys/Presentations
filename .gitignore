@@ -2,14 +2,7 @@
 ## LaTeX
 #############
 
-*.pdf
-*.aux
-*.nav
-*.out
-*.snm
-*.gz
-*.toc
-*.log
+tmp/
 
 #############
 ## Windows detritus
