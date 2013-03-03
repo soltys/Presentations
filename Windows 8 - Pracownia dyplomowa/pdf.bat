@@ -1,4 +1,7 @@
 @echo off
+
+rem tworzenie katalogu tymczasowego
+if not exist tmp mkdir tmp
 rem skrypt do generacji doumentu PDF
 rem wygenerowanie pierwszego pliku aux
 pdflatex -file-line-error-style -output-directory=tmp -aux-directory=tmp -include-directory=tex tex/presentation.tex
