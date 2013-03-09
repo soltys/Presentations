@@ -1,4 +1,5 @@
 ﻿using System;
+using Bing.Maps;
 using DeliveryApp.Common;
 
 namespace DeliveryApp.Models
@@ -31,21 +32,8 @@ namespace DeliveryApp.Models
             get { return _city; }
             set { SetProperty(ref _city, value); }
         }
-
-        private string _address;
-        public string Address
-        {
-            get { return _address; }
-            set { SetProperty(ref _address, value); }
-        }
-
-        private DateTime _dueTime;
-        public DateTime DueTime
-        {
-            get { return _dueTime; }
-            set { SetProperty(ref _dueTime, value); }
-        }
-
+        
+   
         private Priorities _priorities;
         public Priorities Priority
         {
@@ -53,12 +41,18 @@ namespace DeliveryApp.Models
             set { SetProperty(ref _priorities, value); }
         }
 
+        private Location _location;
+        public Location Location
+        {
+            get { return _location; }
+            set { SetProperty(ref _location, value); }
+        }
 
         private bool _isDelivered;
         public bool IsDelivered
         {
             get { return _isDelivered; }
-            set { SetProperty(ref _isDelivered,value); }
+            set { SetProperty(ref _isDelivered, value); }
         }
     }
 }

@@ -2,5 +2,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DeliveryApp.Common">
-    <x:String x:Key="AppName">DeliveryApp</x:String>
+    <x:String x:Key="AppName">Delivery App</x:String>
+    <x:String x:Key="BingMapsKey">AjdRlQCbuc5ppnpbAlXkmBqPC6CsHx8tax4m1kCB_93-WltyqnW0E7u2EyV07wDM</x:String>
 </ResourceDictionary>

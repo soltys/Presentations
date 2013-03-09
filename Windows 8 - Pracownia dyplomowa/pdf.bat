@@ -10,4 +10,6 @@ rem tworzenie odwo³añ do bibliografii
 
 
 rem i interaktywny pdf gotowy
-move tmp\presentation.pdf Windows8_Windows_Runtime_presentation.pdf
+
+move tmp\presentation.pdf Presentation.pdf
+rem xcopy /Y "Presentation.pdf" %HOMEDRIVE%%HOMEPATH%\SkyDrive\Windows8_Presentation.pdf"

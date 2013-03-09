@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bing.Maps;
 using DeliveryApp.Models;
 
 namespace DeliveryApp.Service
@@ -16,7 +17,7 @@ namespace DeliveryApp.Service
             get { return _packages; }
         }
         static readonly Random _randomGenerator = new Random();
-        private static readonly string[] _cities = new[] { "Szczecin", "Goleniów", "Mierzyn" };
+        private static readonly string[] _cities = new[] { "Szczecin", "Goleniów", "Gryfino" };
 
         static PackagesService()
         {
@@ -39,17 +40,39 @@ namespace DeliveryApp.Service
                 {
                     j--;
                 }
-                array.Move(i,j+1);
+                array.Move(i, j + 1);
             }
         }
 
-        private static Package GeneratePackage()
+
+        private static Location CityToLocation(string cityName)
         {
+            switch (cityName)
+            {
+                case "Szczecin":
+                    return new Location(53.432701, 14.548066);
+                case "Goleniów":
+                    return new Location(53.563858, 14.828222);
+                case "Gryfino":
+                    return new Location(53.252380, 14.488230);
+                default:
+                    return new Location(53.432701, 14.548066);
+            }
+        }
+
+        public static Package GeneratePackage()
+        {
+            string name = LoremIpsumService.GetWords(_randomGenerator.Next(2, 5));
+            name = name.ToLowerInvariant();
+            name = name.Substring(0, 1).ToUpperInvariant() + name.Substring(1);
+
+            string city = _cities[_randomGenerator.Next(_cities.Length)];
             return new Package
                 {
-                    Name = LoremIpsumService.GetWords(_randomGenerator.Next(2, 5)),
-                    City = _cities[_randomGenerator.Next(_cities.Length)],
-                    DueTime = DateTime.Now.AddDays(_randomGenerator.Next(1, 4)),
+                    Name =  name,
+                    Description = LoremIpsumService.GetWords(_randomGenerator.Next(15,20)),
+                    City =  city,
+                    Location = CityToLocation(city),
                     Priority = (Priorities)_randomGenerator.Next(5),
                 };
         }

@@ -9,24 +9,27 @@
     xmlns:Converters="using:DeliveryApp.Common.Converters"
     x:Name="pageRoot"
     x:Class="DeliveryApp.Pages.Main.MainPage"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DesignSource="{d:DesignInstance Type=Main:MainPageSampleData,IsDesignTimeCreatable=True}">
     <common:LayoutAwarePage.Resources>
+        <common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <Converters:PriorityToColorConverter x:Key="PriorityToColorConverter"/>
         <Main:MainPageViewModel x:Key="VM"/>
-
         <CollectionViewSource
             x:Name="groupedItemsViewSource"
             Source="{Binding Packages}"
             />
         <DataTemplate x:Key="PackageItemTemplate">
             <Grid HorizontalAlignment="Left" Width="250">
-<Border BorderThickness="1" BorderBrush="WhiteSmoke">
-                <StackPanel VerticalAlignment="Bottom" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
-                    <Rectangle  Height="5" Fill="{Binding Priority, Converter={StaticResource PriorityToColorConverter}}"/>
-                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Height="60" Margin="15,0,15,0"/>
-                    <TextBlock Text="{Binding City}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="15,0,15,10"/>
-                </StackPanel>
+                <Border BorderThickness="1" BorderBrush="WhiteSmoke">
+                    <StackPanel VerticalAlignment="Bottom" Background="{StaticResource ListViewItemOverlayBackgroundThemeBrush}">
+                        <Rectangle  Height="5" Fill="{Binding Priority, Converter={StaticResource PriorityToColorConverter}}"/>
+                        <TextBlock Text="{Binding Name}" Foreground="{StaticResource ListViewItemOverlayForegroundThemeBrush}" Style="{StaticResource TitleTextStyle}" Height="60" Margin="15,0,15,0"/>
+                        <TextBlock Text="{Binding City}" Foreground="{StaticResource ListViewItemOverlaySecondaryForegroundThemeBrush}" Style="{StaticResource CaptionTextStyle}" TextWrapping="NoWrap" Margin="15,0,15,10" FontSize="14"/>
+
+                    </StackPanel>
                 </Border>
+                <Image  Width="50" Height="50" Source="ms-appx:///Assets/check_mark.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5" Visibility="{Binding IsDelivered, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             </Grid>
         </DataTemplate>
         <Style x:Key="AddAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
@@ -109,7 +112,8 @@
 				ItemTemplate="{StaticResource PackageItemTemplate}"
 				SelectionMode="None"
 				IsSwipeEnabled="false"
-				IsItemClickEnabled="True">
+				IsItemClickEnabled="True"
+                ItemClick="ItemGridView_OnItemClick">
                 <GridView.ItemContainerTransitions>
                     <TransitionCollection>
                         <AddDeleteThemeTransition/>
