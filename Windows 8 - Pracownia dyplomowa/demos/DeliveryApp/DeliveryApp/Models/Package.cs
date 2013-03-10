@@ -34,7 +34,7 @@ namespace DeliveryApp.Models
         }
         
    
-        private Priorities _priorities;
+        private Priorities _priorities = Priorities.NotSet;
         public Priorities Priority
         {
             get { return _priorities; }

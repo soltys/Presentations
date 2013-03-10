@@ -15,9 +15,7 @@
     <common:LayoutAwarePage.Resources>
 
         <Converters:PriorityToTextConverter x:Key="PriorityToTextConverter"/>
-
         <Converters:PriorityToVisibilityConveter x:Key="PriorityToVisibilityConveter"/>
-
         <Converters:PriorityToColorConverter x:Key="PriorityToColorConverter"/>
 
         <local:DetailsPageViewModel x:Key="VM"/>
@@ -40,13 +38,7 @@
         <StaticResource ResourceKey="VM"/>
     </common:LayoutAwarePage.DataContext>
 
-
-    <!--
-        This grid acts as a root panel for the page that defines two rows:
-        * Row 0 contains the back button and page title
-        * Row 1 contains the rest of the page layout
-    -->
-    <Grid Style="{StaticResource LayoutRootStyle}">
+    <Grid Background="{StaticResource PageBackgroud}">
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
@@ -98,18 +90,25 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-<Border BorderThickness="5" Grid.Column="1">
-            <StackPanel>
-                <TextBlock Text="Description: " Style="{StaticResource DetailsHeaderTextStyle}" />
-                <TextBlock Text="{Binding Package.Description}" Style="{StaticResource DetailsText}" />
-                <TextBlock Text="City: " Style="{StaticResource DetailsHeaderTextStyle}"/>
-                <TextBlock Text="{Binding Package.City}" Style="{StaticResource DetailsText}"/>
-                <StackPanel Visibility="{Binding Package.Priority, Converter={StaticResource PriorityToVisibilityConveter}}"  >
-                <TextBlock Text="Priority: " Style="{StaticResource DetailsHeaderTextStyle}"/>
-                <TextBlock Text="{Binding Package.Priority, Converter={StaticResource PriorityToTextConverter}}" Foreground="{Binding Package.Priority, Converter={StaticResource PriorityToColorConverter}}" Style="{StaticResource DetailsText}"/>
+            <Border BorderThickness="5" Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="Description: " Style="{StaticResource DetailsHeaderTextStyle}" />
+                    <TextBlock Text="{Binding Package.Description}" Style="{StaticResource DetailsText}" />
+                    <TextBlock Text="City: " Style="{StaticResource DetailsHeaderTextStyle}"/>
+                    <TextBlock Text="{Binding Package.City}" Style="{StaticResource DetailsText}"/>
+                    <StackPanel >
+                        <TextBlock Text="Priority: " Style="{StaticResource DetailsHeaderTextStyle}"/>
+                        <ComboBox Width="150" HorizontalAlignment="Left" SelectedItem="{Binding Package.Priority,Converter={StaticResource PriorityToTextConverter},Mode=TwoWay}">
+                            <ComboBox.Items>
+                                <x:String>Not set</x:String>
+                                <x:String>Low</x:String>
+                                <x:String>Medium</x:String>
+                                <x:String>High</x:String>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+                    <ToggleSwitch Header="Package was delivered." OnContent="Yes" OffContent="No" IsOn="{Binding Package.IsDelivered,Mode=TwoWay}" FontSize="20" Margin="-8,0,0,0"></ToggleSwitch>
                 </StackPanel>
-                <ToggleSwitch Header="Package was delivered." OnContent="Yes" OffContent="No" IsOn="{Binding Package.IsDelivered,Mode=TwoWay}" FontSize="20"></ToggleSwitch>
-            </StackPanel>
             </Border>
             <Grid Grid.Column="2">
                 <Border BorderThickness="5">

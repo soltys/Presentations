@@ -21,7 +21,7 @@ namespace DeliveryApp.Service
 
         static PackagesService()
         {
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 24; i++)
             {
                 _packages.Add(GeneratePackage());
             }

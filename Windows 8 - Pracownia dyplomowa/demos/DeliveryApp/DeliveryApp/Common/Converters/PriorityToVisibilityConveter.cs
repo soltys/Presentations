@@ -14,7 +14,7 @@ namespace DeliveryApp.Common.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var priority = (Priorities)value;
-            return priority != Priorities.NotSet ? Visibility.Visible : Visibility.Collapsed;
+            return priority != Priorities.NotSet ?Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

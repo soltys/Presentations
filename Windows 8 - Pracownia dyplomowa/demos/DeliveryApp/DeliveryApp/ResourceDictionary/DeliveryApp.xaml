@@ -4,4 +4,12 @@
     xmlns:local="using:DeliveryApp.Common">
     <x:String x:Key="AppName">Delivery App</x:String>
     <x:String x:Key="BingMapsKey">AjdRlQCbuc5ppnpbAlXkmBqPC6CsHx8tax4m1kCB_93-WltyqnW0E7u2EyV07wDM</x:String>
+    <LinearGradientBrush x:Key="PageBackgroud"  EndPoint="0.5,0.5" >
+        <LinearGradientBrush.Transform>
+            <CompositeTransform Rotation="45"/>
+        </LinearGradientBrush.Transform>
+        <GradientStop Color="#FF080707" Offset="1"/>
+        <GradientStop Color="#FF5F5F5F"/>
+        <GradientStop Color="#FF444444" Offset="0.117"/>
+    </LinearGradientBrush>
 </ResourceDictionary>
