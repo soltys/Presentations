@@ -3,6 +3,40 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{verbatim} 
+\usepackage{color}
+\definecolor{orange}{HTML}{FF7F00}
+\lstset{
+language=C,
+basicstyle=\ttfamily\scriptsize,
+columns=fullflexible,
+keepspaces,
+breaklines,
+tabsize=3, 
+showstringspaces=false,
+extendedchars=true,
+keywordstyle=\color{blue}\ttfamily,
+stringstyle=\color{red}\ttfamily,
+commentstyle=\color{orange}\ttfamily}
+
+\usepackage{relsize}
+\usepackage{lipsum}
+
+%c from texinfo.tex
+\def\ifmonospace{\ifdim\fontdimen3\font=0pt }
+
+\newcommand{\CC}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +}}
+\def\C++{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+
+%c C sharp
+\def\Csharp{%
+\ifmonospace%
+    C\#%
+\else%
+    C\kern-.1667em\raise.30ex\hbox{\smaller{\#}}%
+\fi%
+\spacefactor1000 }
 
 \title{Programowanie w Windows 8}   
 \subtitle{Pracownia dyplomowa I}
@@ -11,9 +45,9 @@
 \date{\today} 
 \usetheme{PaloAlto}
 
-
-
 \begin{document}
+
+
 \begin{frame}
 \titlepage
 \end{frame} 
@@ -55,48 +89,117 @@ Tylko przy użyciu Visual Studio 2012 (i Windows 8), można tworzyć aplikacje W
 \end{itemize} 
 \end{frame}
 
-\subsection{Biblioteka Windows Runtime}
-\begin{frame}
-\frametitle{Biblioteka Windows Runtime}
-Biblioteka na którą trzeba patrzyć z perspektywy języka programowania. API dopasowuje się do języka programowania!
+\subsection{Platforma Windows Runtime}
+\begin{frame}[fragile]
+\frametitle{Platforma Windows Runtime}
+Windows Runtime bazuje na COM (Component Object Model)
+\\
+Platforma Windows Runtime dopasowuje się do języka programowania!
 \end{frame}
 
-\section{Dema}
+\begin{frame}[fragile]
+\frametitle{\Csharp}
+ \begin{lstlisting}
+StorageFolder picturesFolder = KnownFolders.PicturesLibrary;
+StringBuilder outputText = new StringBuilder();
+
+IReadOnlyList<IStorageItem> itemsList = 
+    await picturesFolder.GetItemsAsync();
+
+foreach (var item in itemsList)
+{
+    if (item is StorageFolder)
+    {
+        outputText.Append(item.Name + " folder\n");
+    }
+    else
+    {
+        outputText.Append(item.Name + "\n");
+    }
+}
+    \end{lstlisting}  
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\C++}
+ \begin{lstlisting}
+StorageFolder^ picturesFolder = KnownFolders::PicturesLibrary;
+auto outputString = make_shared<wstring>();
+
+create_task(picturesFolder->GetItemsAsync())        
+    .then ([this, outputString] (IVectorView<IStorageItem^>^ items)
+{        
+    for ( unsigned int i = 0 ; i < items->Size; i++)
+    {
+        *outputString += items->GetAt(i)->Name->Data();
+        if(items->GetAt(i)->IsOfType(StorageItemTypes::Folder))
+        {
+            *outputString += L"  folder\n";
+        }
+        else
+        {
+            *outputString += L"\n";
+        }
+        m_OutputTextBlock->Text = ref new String((*outputString).c_str());
+    }
+});
+    \end{lstlisting}  
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{JavaScript}
+\begin{lstlisting}
+// Get folder
+var picturesLibrary = Windows.Storage.KnownFolders.picturesLibrary;
+//  Get folder contents
+picturesLibrary.getItemsAsync().then(function (items) {
+    // Then perform tasks with the list of files and folders that was retrieved
+    // For example, display name of containing folder and count of items in folder
+    outputHeader(picturesLibrary.name, items.size);
+
+    // For example, display info for each item
+    items.forEach(function (item) { 
+        if (item.isOfType(Windows.Storage.StorageItemTypes.folder)) { 
+            output(id(picturesLibrary.name), item.name + "\\"); 
+        } 
+        else { 
+            output(id(picturesLibrary.name), item.fileName); 
+        } 
+    }); 
+});
+\end{lstlisting}
+\end{frame}
+
+\section{Demo}
 \subsection{XAML}
 \begin{frame}
 \frametitle{Czym jest XAML?}
-XAML - to język opisu interfejsu użytkownika\\ opartym na \ldots XML
+XAML --- to język opisu interfejsu użytkownika\\ opartym na \ldots XML
 \end{frame}
 
-\begin{frame}
-\frametitle{XAML - demo}
-\begin{Huge}
-DEMO
-\end{Huge}
-\end{frame}
 
 \subsection{Model View ViewModel}
 \begin{frame}
 \frametitle{Czym jest Model View ViewModel?}
-Wzorzec architektoniczny - Służy do rozdzielenia warstwy widoku (GUI) od logiki (back-end).\pause \\ 
-\\
-Informacje dla osób programujących w WPF lub Silverlight: Data Binding jest z Silverlight 2 \pause \\
-\textbf{:-(}
+Wzorzec architektoniczny --- Służy do rozdzielenia warstwy widoku (GUI) od logiki (back--end). \\ 
 \end{frame}
 
 \begin{frame}
 \frametitle{MVVM - demo}
 \begin{Huge}
-DEMO
+Delivery App - DEMO
 \end{Huge}
 \end{frame}
+
+
 \section{Zakończenie}
 \begin{frame}
 \frametitle{Dziękuje za uwagę...}
-Prezentacja i demo są dostępne online \href{http://github.com/soltys}{\beamergotobutton{github.com/soltys}}. \\
+Prezentacja (w \LaTeX) i demo są dostępne online \href{http://github.com/soltys}{\beamergotobutton{github.com/soltys}}. \\
 Bezpośredni link: \href{http://snipurl.com/windows8-prezentacja}{http://snipurl.com/windows8-prezentacja}\\
 \\
 Pytania?
+
 \end{frame}
 
 \end{document}
