@@ -114,7 +114,7 @@
     </Compile>
     <Compile Include="Common\Converters\IsDeliveredToColor.cs" />
     <Compile Include="Common\Converters\PriorityToColorConverter.cs" />
-    <Compile Include="Common\Converters\PriorityToTextConverter.cs" />
+    <Compile Include="Common\Converters\PriorityToStringConverter.cs" />
     <Compile Include="Common\Converters\PriorityToVisibilityConveter.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\Priorities.cs" />

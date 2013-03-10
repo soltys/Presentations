@@ -14,7 +14,7 @@
 
     <common:LayoutAwarePage.Resources>
 
-        <Converters:PriorityToTextConverter x:Key="PriorityToTextConverter"/>
+        <Converters:PriorityToStringConverter x:Key="PriorityToTextConverter"/>
         <Converters:PriorityToVisibilityConveter x:Key="PriorityToVisibilityConveter"/>
         <Converters:PriorityToColorConverter x:Key="PriorityToColorConverter"/>
 
