@@ -1,0 +1,140 @@
+\documentclass{beamer}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{verbatim} 
+\usepackage{color}
+\definecolor{orange}{HTML}{FF7F00}
+\lstset{
+language=C,
+basicstyle=\ttfamily\scriptsize,
+columns=fullflexible,
+keepspaces,
+breaklines,
+tabsize=3, 
+showstringspaces=false,
+extendedchars=true,
+keywordstyle=\color{blue}\ttfamily,
+stringstyle=\color{red}\ttfamily,
+commentstyle=\color{orange}\ttfamily}
+
+\usepackage{relsize}
+\usepackage{lipsum}
+
+%c from texinfo.tex
+\def\ifmonospace{\ifdim\fontdimen3\font=0pt }
+
+\newcommand{\CC}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +}}
+\def\C++{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+
+%c C sharp
+\def\Csharp{%
+\ifmonospace%
+    C\#%
+\else%
+    C\kern-.1667em\raise.30ex\hbox{\smaller{\#}}%
+\fi%
+\spacefactor1000 }
+
+\title{Wprowadzenie do programowania w WinRT (Windows 8)}   
+\subtitle{Programowanie systemów osadzonych}
+\author[Paweł Sołtysiak]
+       {Paweł Sołtysiak \\ \texttt{psoltysiak@uznam.org}}
+%\author{Paweł Sołtysiak\\ \texttt{psoltysiak@uznam.org}} 
+\institute{Wydział Informatyki\\ Zachodniopomorski Uniwersytet Technologiczny w Szczecinie}
+\date{28 października 2013} 
+\usetheme{PaloAlto}
+
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame} 
+
+
+\begin{frame}
+\frametitle{Agenda} 
+\tableofcontents
+\end{frame} 
+
+\section{Microsoft Windows 8}
+\begin{frame}
+\frametitle{Windows 8} 
+Windows Runtime to nowy podsystem od Microsoft$\textsuperscript{\textregistered}$, którego celem było wprowadzenie jednej platformy dla wszystkich urządzeń od komputerów do tabletów.
+\end{frame}
+
+\section{Narzędzia do programowania}
+\begin{frame}
+\frametitle{Visual Studio 2012} 
+Tylko przy użyciu Visual Studio 2012 i starszych, można tworzyć aplikacje Windows Store Apps.
+\end{frame}
+
+\subsection{Języki programowania}
+\begin{frame}
+\frametitle{Dostępne języki programowania} 
+\begin{itemize}
+\item JavaScript oraz HTML
+\item C\# oraz XAML
+\item C++/CX oraz XAML (nie mylić z C++/CLI!)
+\end{itemize} 
+\end{frame}
+
+\begin{frame}
+\frametitle{Każdy język posiada inny cel} 
+\begin{itemize}
+\item JavaScript oraz HTML - Szybkie tworzenie aplikacji, narzędzie dla Web Developerów.
+\item C\# oraz XAML
+\item C++/CX oraz XAML - Dla aplikacji w których ważna jest wydajność.
+\end{itemize} 
+\end{frame}
+
+\subsection{Platforma Windows Runtime}
+\begin{frame}[fragile]
+\frametitle{Platforma Windows Runtime}
+Windows Runtime bazuje na COM (Component Object Model)
+\\
+Platforma Windows Runtime dopasowuje się do języka programowania!
+\end{frame}
+
+
+\section{Demo}
+\subsection{Hello World}
+\begin{frame}
+\frametitle{Hello World -- C\#}
+Demo będzie zawierać:
+\begin{itemize}
+\item Wyświetlenie tekstu
+\item Przycisk z akcję
+\item Trochę o XAML
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Hello World -- demo}
+
+\begin{Huge}
+Hello World -- DEMO
+\end{Huge}
+\\~\\
+\begin{large}
+Przy użyciu C\# oraz XAML
+\end{large}
+
+\end{frame}
+
+
+\section{Zakończenie}
+\begin{frame}
+\frametitle{Dziękuje za uwagę!}
+Prezentacja (w \LaTeX) jest dostępna online \href{http://github.com/soltys}{\beamergotobutton{github.com/soltys}}. 
+~\\
+~\\
+Pytania?
+
+\end{frame}
+
+\end{document}
