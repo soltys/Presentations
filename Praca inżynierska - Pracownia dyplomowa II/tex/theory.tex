@@ -61,6 +61,76 @@ Windows Runtime jest oparte na COM (Component Object Model). Wykorzystanie COM p
 \end{itemize}
 \end{frame}
 
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\begin{frame}[fragile]
+\frametitle{JavaScript}
+\begin{adjustbox}{width=\textwidth}
+\begin{lstlisting}
+
+function onDataChanged(e) { 
+        var reading = e.reading; 
+ 
+        document.getElementById("eventOutputX").innerHTML = reading.accelerationX.toFixed(2); 
+        document.getElementById("eventOutputY").innerHTML = reading.accelerationY.toFixed(2); 
+        document.getElementById("eventOutputZ").innerHTML = reading.accelerationZ.toFixed(2); 
+    }  
+\end{lstlisting}
+\end{adjustbox}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\Csharp}
+\begin{adjustbox}{width=\textwidth}
+\begin{lstlisting}
+async private void ReadingChanged(object sender, AccelerometerReadingChangedEventArgs e) 
+        { 
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            { 
+                AccelerometerReading reading = e.Reading; 
+                ScenarioOutput_X.Text = String.Format("{0,5:0.00}", reading.AccelerationX); 
+                ScenarioOutput_Y.Text = String.Format("{0,5:0.00}", reading.AccelerationY); 
+                ScenarioOutput_Z.Text = String.Format("{0,5:0.00}", reading.AccelerationZ); 
+            }); 
+        } 
+\end{lstlisting}
+\end{adjustbox}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{\texttt{C++/CX}}
+\begin{adjustbox}{width=\textwidth}
+\begin{lstlisting}
+void Scenario1::ReadingChanged(Accelerometer^ sender, AccelerometerReadingChangedEventArgs^ e) 
+{ 
+    // We need to dispatch to the UI thread to display the output 
+    Dispatcher->RunAsync( 
+        CoreDispatcherPriority::Normal, 
+        ref new DispatchedHandler( 
+            [this, e]() 
+            { 
+                AccelerometerReading^ reading = e->Reading; 
+ 
+                ScenarioOutput_X->Text = reading->AccelerationX.ToString(); 
+                ScenarioOutput_Y->Text = reading->AccelerationY.ToString(); 
+                ScenarioOutput_Z->Text = reading->AccelerationZ.ToString(); 
+            }, 
+            CallbackContext::Any 
+            ) 
+        ); 
+} 
+\end{lstlisting}
+\end{adjustbox}
+
+\end{frame}
+
 \begin{frame}
 \frametitle{Języki opisu interfejsu użytkownika}
 \begin{itemize}
@@ -69,12 +139,7 @@ Windows Runtime jest oparte na COM (Component Object Model). Wykorzystanie COM p
 \end{itemize}
 \end{frame}
 
-\lstset{
-  basicstyle=\ttfamily,
-  columns=fullflexible,
-  showstringspaces=false,
-  commentstyle=\color{gray}\upshape
-}
+
 
 \lstdefinelanguage{XML}
 {
